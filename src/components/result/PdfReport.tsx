@@ -124,7 +124,7 @@ export function generatePdfReport(result: FireResult, input: FireInput) {
     <div class="kpi-card">
       <div class="kpi-label">退休月缺口</div>
       <div class="kpi-value ${hasGap ? 'gap' : 'ok'}">
-        ${hasGap ? formatCurrencyFull(result.monthlyGap) + '/月' : '無缺口 ✓'}
+        ${hasGap ? formatCurrencyFull(result.monthlyGap) + '/月' : '無缺口'}
       </div>
     </div>
     <div class="kpi-card">

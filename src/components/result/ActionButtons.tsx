@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { RefreshCw, FileText, Share2 } from 'lucide-react'
 
 interface ActionButtonsProps {
   onDownloadPdf: () => void
@@ -22,14 +23,16 @@ export default function ActionButtons({ onDownloadPdf }: ActionButtonsProps) {
         onClick={() => router.push('/calculator')}
         className="h-14 text-base rounded-xl"
       >
-        🔄 重新計算
+        <RefreshCw className="w-5 h-5 mr-2" />
+        重新計算
       </Button>
       <Button
         size="lg"
         onClick={onDownloadPdf}
         className="h-14 text-base rounded-xl bg-[#1e3a5f] hover:bg-[#162d4a] text-white"
       >
-        📄 下載 PDF
+        <FileText className="w-5 h-5 mr-2" />
+        下載 PDF
       </Button>
       <Button
         variant="outline"
@@ -37,7 +40,8 @@ export default function ActionButtons({ onDownloadPdf }: ActionButtonsProps) {
         onClick={handleShare}
         className="h-14 text-base rounded-xl"
       >
-        📤 分享結果
+        <Share2 className="w-5 h-5 mr-2" />
+        分享結果
       </Button>
     </div>
   )

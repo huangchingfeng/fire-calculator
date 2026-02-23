@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
 import { Card, CardContent } from '@/components/ui/card'
+import { CurrencyInput } from '@/components/ui/currency-input'
 import type { IncomeInput } from '@/types/fire'
 import { formatCurrencyFull } from '@/lib/format'
 
@@ -28,7 +29,7 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-[#1e3a5f]">Step 1：你的收入</h2>
-        <p className="text-gray-500 mt-1">先來看看你的收入結構 💼</p>
+        <p className="text-gray-500 mt-1">先來看看你的收入結構</p>
       </div>
 
       <div className="grid gap-5">
@@ -37,26 +38,24 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
           <Label htmlFor="monthlySalary" className="text-base">
             月薪（稅前）<span className="text-red-500">*</span>
           </Label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-              NT$
-            </span>
-            <Input
-              id="monthlySalary"
-              type="number"
-              inputMode="numeric"
-              placeholder="例：50000"
-              value={data.monthlySalary || ''}
-              onChange={(e) => update('monthlySalary', Number(e.target.value))}
-              className="pl-12 h-12 text-lg"
-            />
-          </div>
+          <CurrencyInput
+            id="monthlySalary"
+            value={data.monthlySalary}
+            onChange={(v) => update('monthlySalary', v)}
+            placeholder="例：50,000"
+            showUnitToggle
+            presets={[30000, 50000, 70000, 100000]}
+            presetLabels={['3萬', '5萬', '7萬', '10萬']}
+          />
         </div>
 
         {/* 年終 */}
         <div className="space-y-2">
           <Label htmlFor="bonusMonths" className="text-base">
             年終獎金（幾個月）
+            <span className="ml-2 text-xs text-gray-400 font-normal bg-gray-100 px-2 py-0.5 rounded-full">
+              選填
+            </span>
           </Label>
           <Input
             id="bonusMonths"
@@ -74,22 +73,12 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
           <Label htmlFor="otherMonthlyIncome" className="text-base">
             其他月收入（選填）
           </Label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-              NT$
-            </span>
-            <Input
-              id="otherMonthlyIncome"
-              type="number"
-              inputMode="numeric"
-              placeholder="兼職、租金、股利等"
-              value={data.otherMonthlyIncome || ''}
-              onChange={(e) =>
-                update('otherMonthlyIncome', Number(e.target.value))
-              }
-              className="pl-12 h-12 text-lg"
-            />
-          </div>
+          <CurrencyInput
+            id="otherMonthlyIncome"
+            value={data.otherMonthlyIncome}
+            onChange={(v) => update('otherMonthlyIncome', v)}
+            placeholder="兼職、租金、股利等"
+          />
         </div>
 
         {/* 配偶月收入 */}
@@ -97,22 +86,12 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
           <Label htmlFor="spouseMonthlyIncome" className="text-base">
             配偶月收入（選填）
           </Label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-              NT$
-            </span>
-            <Input
-              id="spouseMonthlyIncome"
-              type="number"
-              inputMode="numeric"
-              placeholder="如果有配偶收入"
-              value={data.spouseMonthlyIncome || ''}
-              onChange={(e) =>
-                update('spouseMonthlyIncome', Number(e.target.value))
-              }
-              className="pl-12 h-12 text-lg"
-            />
-          </div>
+          <CurrencyInput
+            id="spouseMonthlyIncome"
+            value={data.spouseMonthlyIncome}
+            onChange={(v) => update('spouseMonthlyIncome', v)}
+            placeholder="如果有配偶收入"
+          />
         </div>
 
         {/* 勞保年資 */}

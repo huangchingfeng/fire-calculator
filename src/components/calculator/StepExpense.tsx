@@ -1,8 +1,8 @@
 'use client'
 
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
+import { CurrencyInput } from '@/components/ui/currency-input'
 import type { ExpenseInput } from '@/types/fire'
 import { formatCurrencyFull } from '@/lib/format'
 
@@ -30,49 +30,53 @@ export default function StepExpense({ data, onChange }: StepExpenseProps) {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-[#1e3a5f]">Step 2：你的支出</h2>
-        <p className="text-gray-500 mt-1">接下來看看錢都花去哪了 💰</p>
+        <p className="text-gray-500 mt-1">接下來看看錢都花去哪了</p>
       </div>
 
       <div className="grid gap-5">
-        <NumberField
+        <CurrencyField
           label="房租 / 房貸月付"
           required
           placeholder="每月房貸或房租"
           value={data.housingCost}
           onChange={(v) => update('housingCost', v)}
+          presets={[8000, 15000, 25000, 35000]}
+          presetLabels={['8千', '1.5萬', '2.5萬', '3.5萬']}
         />
-        <NumberField
+        <CurrencyField
           label="生活費"
           required
           placeholder="飲食 + 交通 + 日用"
           value={data.livingCost}
           onChange={(v) => update('livingCost', v)}
+          presets={[15000, 20000, 30000, 40000]}
+          presetLabels={['1.5萬', '2萬', '3萬', '4萬']}
         />
-        <NumberField
+        <CurrencyField
           label="保險費（月繳）"
           placeholder="壽險、醫療險等"
           value={data.insuranceCost}
           onChange={(v) => update('insuranceCost', v)}
         />
-        <NumberField
+        <CurrencyField
           label="孝親費"
           placeholder="每月給父母的錢"
           value={data.parentalSupport}
           onChange={(v) => update('parentalSupport', v)}
         />
-        <NumberField
+        <CurrencyField
           label="教育費"
           placeholder="小孩學費、補習等"
           value={data.educationCost}
           onChange={(v) => update('educationCost', v)}
         />
-        <NumberField
+        <CurrencyField
           label="其他固定支出"
           placeholder="訂閱、會費等"
           value={data.otherFixedCost}
           onChange={(v) => update('otherFixedCost', v)}
         />
-        <NumberField
+        <CurrencyField
           label="年度大額支出"
           placeholder="旅遊、稅金、紅包等"
           value={data.annualLargeExpense}
@@ -102,13 +106,15 @@ export default function StepExpense({ data, onChange }: StepExpenseProps) {
   )
 }
 
-function NumberField({
+function CurrencyField({
   label,
   placeholder,
   value,
   onChange,
   required,
   note,
+  presets,
+  presetLabels,
 }: {
   label: string
   placeholder?: string
@@ -116,6 +122,8 @@ function NumberField({
   onChange: (v: number) => void
   required?: boolean
   note?: string
+  presets?: number[]
+  presetLabels?: string[]
 }) {
   return (
     <div className="space-y-2">
@@ -123,19 +131,13 @@ function NumberField({
         {label}
         {required && <span className="text-red-500">*</span>}
       </Label>
-      <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-          NT$
-        </span>
-        <Input
-          type="number"
-          inputMode="numeric"
-          placeholder={placeholder}
-          value={value || ''}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="pl-12 h-12 text-lg"
-        />
-      </div>
+      <CurrencyInput
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        presets={presets}
+        presetLabels={presetLabels}
+      />
       {note && <p className="text-xs text-gray-400">{note}</p>}
     </div>
   )

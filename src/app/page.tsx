@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { MapPin, BarChart3, Briefcase } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function Home() {
   return (
@@ -33,17 +35,17 @@ export default function Home() {
         {/* 三個特色 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
           <FeatureCard
-            icon="🇹🇼"
+            icon={<MapPin className="w-6 h-6 text-[#1e3a5f]" />}
             title="台灣在地化"
             desc="整合勞保勞退、健保、所得稅率，計算結果貼近現實"
           />
           <FeatureCard
-            icon="📊"
+            icon={<BarChart3 className="w-6 h-6 text-[#1e3a5f]" />}
             title="視覺化報告"
             desc="資產成長曲線、退休收入圓餅圖，一看就懂"
           />
           <FeatureCard
-            icon="💼"
+            icon={<Briefcase className="w-6 h-6 text-[#1e3a5f]" />}
             title="業務話術引導"
             desc="專業 PDF 報告，直接拿給客戶看，提升信任感"
           />
@@ -63,13 +65,15 @@ function FeatureCard({
   title,
   desc,
 }: {
-  icon: string
+  icon: ReactNode
   title: string
   desc: string
 }) {
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-      <div className="text-3xl mb-3">{icon}</div>
+      <div className="w-12 h-12 bg-[#1e3a5f]/10 rounded-xl flex items-center justify-center mb-3">
+        {icon}
+      </div>
       <h3 className="font-semibold text-[#1e3a5f] mb-2">{title}</h3>
       <p className="text-sm text-gray-500">{desc}</p>
     </div>

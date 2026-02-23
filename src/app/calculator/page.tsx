@@ -16,7 +16,7 @@ const STEP_LABELS = ['收入', '支出', '資產', '目標']
 const defaultFormData: FireInput = {
   income: {
     monthlySalary: 0,
-    bonusMonths: 2,
+    bonusMonths: 0,
     otherMonthlyIncome: 0,
     spouseMonthlyIncome: 0,
     laborInsuranceYears: 10,

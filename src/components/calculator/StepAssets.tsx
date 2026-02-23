@@ -1,8 +1,8 @@
 'use client'
 
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
+import { CurrencyInput } from '@/components/ui/currency-input'
 import type { AssetInput } from '@/types/fire'
 import { formatCurrencyFull } from '@/lib/format'
 
@@ -24,40 +24,47 @@ export default function StepAssets({ data, onChange }: StepAssetsProps) {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-[#1e3a5f]">Step 3：你的資產</h2>
-        <p className="text-gray-500 mt-1">盤點一下你現有的資產 🏦</p>
+        <p className="text-gray-500 mt-1">盤點一下你現有的資產</p>
       </div>
 
       <div className="grid gap-5">
-        <NumberField
+        <AssetField
           label="銀行存款"
           required
           placeholder="活存 + 定存"
           value={data.savings}
           onChange={(v) => update('savings', v)}
+          showUnitToggle
+          presets={[500000, 1000000, 2000000, 5000000]}
+          presetLabels={['50萬', '100萬', '200萬', '500萬']}
         />
-        <NumberField
+        <AssetField
           label="投資部位"
           placeholder="股票 + 基金 + ETF"
           value={data.investments}
           onChange={(v) => update('investments', v)}
+          showUnitToggle
         />
-        <NumberField
+        <AssetField
           label="儲蓄險"
           placeholder="保單價值準備金"
           value={data.insuranceSavings}
           onChange={(v) => update('insuranceSavings', v)}
+          showUnitToggle
         />
-        <NumberField
+        <AssetField
           label="其他資產"
           placeholder="房產、黃金等"
           value={data.otherAssets}
           onChange={(v) => update('otherAssets', v)}
+          showUnitToggle
         />
-        <NumberField
+        <AssetField
           label="負債總額"
           placeholder="房貸 + 車貸 + 學貸 + 信貸"
           value={data.totalDebt}
           onChange={(v) => update('totalDebt', v)}
+          showUnitToggle
           isDebt
         />
       </div>
@@ -93,13 +100,16 @@ export default function StepAssets({ data, onChange }: StepAssetsProps) {
   )
 }
 
-function NumberField({
+function AssetField({
   label,
   placeholder,
   value,
   onChange,
   required,
   isDebt,
+  showUnitToggle,
+  presets,
+  presetLabels,
 }: {
   label: string
   placeholder?: string
@@ -107,6 +117,9 @@ function NumberField({
   onChange: (v: number) => void
   required?: boolean
   isDebt?: boolean
+  showUnitToggle?: boolean
+  presets?: number[]
+  presetLabels?: string[]
 }) {
   return (
     <div className="space-y-2">
@@ -114,19 +127,15 @@ function NumberField({
         {label}
         {required && <span className="text-red-500">*</span>}
       </Label>
-      <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-          NT$
-        </span>
-        <Input
-          type="number"
-          inputMode="numeric"
-          placeholder={placeholder}
-          value={value || ''}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className={`pl-12 h-12 text-lg ${isDebt ? 'border-red-200 focus-visible:border-red-400' : ''}`}
-        />
-      </div>
+      <CurrencyInput
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        showUnitToggle={showUnitToggle}
+        presets={presets}
+        presetLabels={presetLabels}
+        className={isDebt ? 'border-red-200 focus-visible:border-red-400' : undefined}
+      />
     </div>
   )
 }
