@@ -72,7 +72,12 @@ function AuthContent() {
 
   const handleError = (err: unknown) => {
     const code = (err as { code?: string })?.code ?? ''
-    setError(getErrorMessage(code))
+    const message = (err as { message?: string })?.message ?? ''
+    if (code) {
+      setError(getErrorMessage(code))
+    } else {
+      setError(`登入失敗：${message || '未知錯誤'}`)
+    }
   }
 
   const handleGoogle = async () => {
