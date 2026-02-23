@@ -78,6 +78,7 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
             value={data.otherMonthlyIncome}
             onChange={(v) => update('otherMonthlyIncome', v)}
             placeholder="兼職、租金、股利等"
+            showUnitToggle
           />
         </div>
 
@@ -91,6 +92,7 @@ export default function StepIncome({ data, onChange }: StepIncomeProps) {
             value={data.spouseMonthlyIncome}
             onChange={(v) => update('spouseMonthlyIncome', v)}
             placeholder="如果有配偶收入"
+            showUnitToggle
           />
         </div>
 
