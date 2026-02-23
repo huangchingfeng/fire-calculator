@@ -23,9 +23,13 @@ function getErrorMessage(code: string): string {
     'auth/invalid-credential': '帳號或密碼錯誤',
     'auth/too-many-requests': '嘗試次數過多，請稍後再試',
     'auth/popup-closed-by-user': '登入視窗已關閉',
+    'auth/popup-blocked': '瀏覽器封鎖了登入視窗，請允許彈出視窗',
+    'auth/unauthorized-domain': '此網域尚未授權，請到 Firebase Console → Authentication → Settings → 授權網域 新增此網域',
     'auth/network-request-failed': '網路連線異常，請檢查網路',
+    'auth/cancelled-popup-request': '登入已取消',
+    'auth/internal-error': '系統內部錯誤，請稍後再試',
   }
-  return map[code] ?? '登入失敗，請稍後再試'
+  return map[code] ?? `登入失敗（${code || '未知錯誤'}）`
 }
 
 export default function AuthPage() {
