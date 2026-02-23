@@ -49,7 +49,17 @@ const defaultFormData: FireInput = {
 export default function CalculatorPage() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
-  const [formData, setFormData] = useState<FireInput>(defaultFormData)
+  const [formData, setFormData] = useState<FireInput>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = sessionStorage.getItem('fire-input')
+        if (saved) return JSON.parse(saved) as FireInput
+      } catch {
+        // ignore parse errors
+      }
+    }
+    return defaultFormData
+  })
 
   const progressValue = (currentStep / 4) * 100
 

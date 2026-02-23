@@ -42,6 +42,7 @@ export default function StepExpense({ data, onChange }: StepExpenseProps) {
           onChange={(v) => update('housingCost', v)}
           presets={[8000, 15000, 25000, 35000]}
           presetLabels={['8千', '1.5萬', '2.5萬', '3.5萬']}
+          showUnitToggle
         />
         <CurrencyField
           label="生活費"
@@ -51,30 +52,35 @@ export default function StepExpense({ data, onChange }: StepExpenseProps) {
           onChange={(v) => update('livingCost', v)}
           presets={[15000, 20000, 30000, 40000]}
           presetLabels={['1.5萬', '2萬', '3萬', '4萬']}
+          showUnitToggle
         />
         <CurrencyField
           label="保險費（月繳）"
           placeholder="壽險、醫療險等"
           value={data.insuranceCost}
           onChange={(v) => update('insuranceCost', v)}
+          showUnitToggle
         />
         <CurrencyField
           label="孝親費"
           placeholder="每月給父母的錢"
           value={data.parentalSupport}
           onChange={(v) => update('parentalSupport', v)}
+          showUnitToggle
         />
         <CurrencyField
           label="教育費"
           placeholder="小孩學費、補習等"
           value={data.educationCost}
           onChange={(v) => update('educationCost', v)}
+          showUnitToggle
         />
         <CurrencyField
           label="其他固定支出"
           placeholder="訂閱、會費等"
           value={data.otherFixedCost}
           onChange={(v) => update('otherFixedCost', v)}
+          showUnitToggle
         />
         <CurrencyField
           label="年度大額支出"
@@ -82,6 +88,7 @@ export default function StepExpense({ data, onChange }: StepExpenseProps) {
           value={data.annualLargeExpense}
           onChange={(v) => update('annualLargeExpense', v)}
           note="這項填的是「整年度」的金額"
+          showUnitToggle
         />
       </div>
 
@@ -115,6 +122,7 @@ function CurrencyField({
   note,
   presets,
   presetLabels,
+  showUnitToggle,
 }: {
   label: string
   placeholder?: string
@@ -124,6 +132,7 @@ function CurrencyField({
   note?: string
   presets?: number[]
   presetLabels?: string[]
+  showUnitToggle?: boolean
 }) {
   return (
     <div className="space-y-2">
@@ -137,6 +146,7 @@ function CurrencyField({
         placeholder={placeholder}
         presets={presets}
         presetLabels={presetLabels}
+        showUnitToggle={showUnitToggle}
       />
       {note && <p className="text-xs text-gray-400">{note}</p>}
     </div>

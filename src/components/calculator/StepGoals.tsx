@@ -106,6 +106,7 @@ export default function StepGoals({ data, onChange }: StepGoalsProps) {
             value={data.retirementMonthlyExpense}
             onChange={(v) => update('retirementMonthlyExpense', v)}
             placeholder="例：40,000"
+            showUnitToggle
             presets={[30000, 40000, 50000, 60000]}
             presetLabels={['3萬', '4萬', '5萬', '6萬']}
           />

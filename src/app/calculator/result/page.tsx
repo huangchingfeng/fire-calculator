@@ -75,7 +75,7 @@ export default function ResultPage() {
         <Suggestions result={result} input={input} />
 
         {/* 行動按鈕 */}
-        <ActionButtons onDownloadPdf={handleDownloadPdf} />
+        <ActionButtons onDownloadPdf={handleDownloadPdf} input={input} result={result} />
 
         {/* 底部說明 */}
         <div className="text-center text-xs text-gray-400 pb-8">

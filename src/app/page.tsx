@@ -2,10 +2,15 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { MapPin, BarChart3, Briefcase } from 'lucide-react'
 import type { ReactNode } from 'react'
+import UserMenu from '@/components/UserMenu'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[#f8fafc]">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[#f8fafc] relative">
+      {/* 用戶選單 */}
+      <div className="absolute top-4 right-4">
+        <UserMenu />
+      </div>
       <main className="max-w-2xl w-full text-center space-y-8">
         {/* 主標題 */}
         <div className="space-y-4">
